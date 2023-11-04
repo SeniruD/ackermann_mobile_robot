@@ -4,8 +4,15 @@
   <xacro:include filename="$(find racecar_description)/urdf/macros.xacro" />
 
   <!-- Add chassis and it's inertia link -->
+  <link name="base_footprint"></link>
+  <link name="base_link"></link>
 
-  <link name="base_link" />
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="-0.1625 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+  
 
   <link name="chassis">
     <visual>

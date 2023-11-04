@@ -20,8 +20,8 @@ def set_throttle_steer(data):
 
     pub_vel_left_rear_wheel = rospy.Publisher('/racecar/left_rear_wheel_velocity_controller/command', Float64, queue_size=1)
     pub_vel_right_rear_wheel = rospy.Publisher('/racecar/right_rear_wheel_velocity_controller/command', Float64, queue_size=1)
-    # pub_vel_left_front_wheel = rospy.Publisher('/racecar/left_front_wheel_velocity_controller/command', Float64, queue_size=1)
-    # pub_vel_right_front_wheel = rospy.Publisher('/racecar/right_front_wheel_velocity_controller/command', Float64, queue_size=1)
+    pub_vel_left_front_wheel = rospy.Publisher('/racecar/left_front_wheel_velocity_controller/command', Float64, queue_size=1)
+    pub_vel_right_front_wheel = rospy.Publisher('/racecar/right_front_wheel_velocity_controller/command', Float64, queue_size=1)
 
     pub_pos_left_steering_hinge = rospy.Publisher('/racecar/left_steering_hinge_position_controller/command', Float64, queue_size=1)
     pub_pos_right_steering_hinge = rospy.Publisher('/racecar/right_steering_hinge_position_controller/command', Float64, queue_size=1)
@@ -29,10 +29,10 @@ def set_throttle_steer(data):
     #
 
     throttle = data.speed/0.01
-    steer = (-1)*data.steering_angle * 0.145* math.pi
+    steer = (-1) * data.steering_angle * 0.145 * math.pi
 
     if (abs(steer) > 0.145 * math.pi):
-        steer= steer/abs(steer) * 0.145* math.pi
+        steet= steer/abs(steer) * 0.145 * math.pi
 
     if (steer != 0) :
         L = 0.325
@@ -47,8 +47,8 @@ def set_throttle_steer(data):
 
     pub_vel_left_rear_wheel.publish(throttle)
     pub_vel_right_rear_wheel.publish(throttle)
-    # pub_vel_left_front_wheel.publish(throttle)
-    # pub_vel_right_front_wheel.publish(throttle)
+    pub_vel_left_front_wheel.publish(throttle)
+    pub_vel_right_front_wheel.publish(throttle)
     pub_pos_left_steering_hinge.publish(steerInner)
     pub_pos_right_steering_hinge.publish(steerOuter)
 

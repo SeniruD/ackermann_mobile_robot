@@ -11,11 +11,11 @@
 
   <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
   <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
-  <param name="run_camera" value="true"/>
+  <param name="run_camera" value="false"/>
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="racecar_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model racecar -z 0.05" />
-
+  
   <!-- ros_control racecar launch file -->
   <!--include file="$(find racecar_control)/launch/racecar_control.launch" ns="/"/-->
 
