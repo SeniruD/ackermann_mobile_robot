@@ -4,6 +4,7 @@
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find racecar_control)/config/racecar_control.yaml" command="load"/>
+  <arg name="rvizconfig" default="$(find racecar_navigation)/launch/nav.rviz" />
 
   <!-- load the controllers -->
   <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
@@ -32,6 +33,9 @@ left_front_wheel_velocity_controller right_front_wheel_velocity_controller
   <node pkg="racecar_gazebo" name="gazebo_odometry_node" type="tf_odom_publisher.py"/>
   <node pkg="cmd_vel_to_ackermann_drive" name="cmd_vel_to_ackermann_cmd" type="cmd_vel_to_ackermann_drive.py"/>
 
+
+  <!-- Open rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
 
   <!-- <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
       args="cmd_vel drive_cmd" /> -->

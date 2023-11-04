@@ -29,7 +29,7 @@ def set_throttle_steer(data):
     #
 
     throttle = data.speed/0.01
-    steer = (-1) * data.steering_angle * 0.145 * math.pi
+    steer = (-1)*data.steering_angle * 0.145 * math.pi
 
     if (abs(steer) > 0.145 * math.pi):
         steet= steer/abs(steer) * 0.145 * math.pi
