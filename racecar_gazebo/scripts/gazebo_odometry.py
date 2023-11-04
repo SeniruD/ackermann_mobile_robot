@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-
+#!/usr/bin/env python3
 '''
 This script makes Gazebo less fail by translating gazebo status messages to odometry data.
 Since Gazebo also publishes data faster than normal odom data, this script caps the update to 20hz.
@@ -17,7 +16,7 @@ import tf2_ros
 
 class OdometryNode:
     # Set publishers
-    pub_odom = rospy.Publisher('/vesc/odom', Odometry, queue_size=1)
+    pub_odom = rospy.Publisher('/odom', Odometry, queue_size=1)
 
     def __init__(self):
         # init internals
@@ -36,7 +35,7 @@ class OdometryNode:
     def sub_robot_pose_update(self, msg):
         # Find the index of the racecar
         try:
-            arrayIndex = msg.name.index('racecar::base_link')
+            arrayIndex = msg.name.index('racecar::base_footprint')
         except ValueError as e:
             # Wait for Gazebo to startup
             pass
@@ -52,8 +51,8 @@ class OdometryNode:
 
         cmd = Odometry()
         cmd.header.stamp = self.last_recieved_stamp
-        cmd.header.frame_id = 'map'
-        cmd.child_frame_id = 'odom'
+        cmd.header.frame_id = 'odom'
+        cmd.child_frame_id = 'base_footprint'
         cmd.pose.pose = self.last_received_pose
         cmd.twist.twist = self.last_received_twist
         self.pub_odom.publish(cmd)
