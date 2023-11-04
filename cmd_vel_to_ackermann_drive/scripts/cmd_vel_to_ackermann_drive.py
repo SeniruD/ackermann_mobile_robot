@@ -107,12 +107,12 @@ def publishAckermannMsg(power, steering):
 
     rospy.loginfo("Info: power: %s, steering: %s, State: %s", power, steering, currentState)
 
-    msg = AckermannDriveStamped()
-    msg.header.stamp = rospy.Time.now()
-    msg.header.frame_id = frame_id
-    msg.drive.steering_angle = steering
-    msg.drive.speed = power
-    pub.publish(msg.drive)
+    msg = AckermannDrive()
+    # msg.header.stamp = rospy.Time.now()
+    # msg.header.frame_id = frame_id
+    msg.steering_angle = steering
+    msg.speed = power
+    pub.publish(msg)
 
 
 def convert_trans_rot_vel_to_steering_angle(v, omega, wheelbase):
