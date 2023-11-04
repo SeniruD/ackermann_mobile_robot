@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy, math
 from geometry_msgs.msg import Twist
@@ -180,7 +180,7 @@ if __name__ == '__main__':
         rospy.init_node('cmd_vel_to_ackermann_drive')
 
         twist_cmd_topic = rospy.get_param('~twist_cmd_topic', '/cmd_vel')
-        ackermann_cmd_topic = rospy.get_param('~ackermann_cmd_topic', '/drivecmd')
+        ackermann_cmd_topic = rospy.get_param('~ackermann_cmd_topic', '/drive_cmd')
         wheelbase = rospy.get_param('~wheelbase', 0.325)
         gazeboSimulation = rospy.get_param('~gazeboSimulation', False)
         frame_id = rospy.get_param('~frame_id', 'base_link')

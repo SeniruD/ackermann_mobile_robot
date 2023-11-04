@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 
-from ackermann_msgs.msg import AckermannDriveStamped
+from ackermann_msgs.msg import AckermannDrive
 
 import sys, select, termios, tty
 
 banner = """
-Reading from the keyboard  and Publishing to AckermannDriveStamped!
+Reading from the keyboard  and Publishing to AckermannDrive!
 ---------------------------
 Moving around:
         w
@@ -37,7 +37,7 @@ def vels(speed,turn):
 
 if __name__=="__main__":
   settings = termios.tcgetattr(sys.stdin)
-  pub = rospy.Publisher('/vesc/ackermann_cmd_mux/input/teleop', AckermannDriveStamped)
+  pub = rospy.Publisher('drive_cmd', AckermannDrive , queue_size= 1)
   rospy.init_node('keyop')
 
   x = 0
@@ -55,31 +55,31 @@ if __name__=="__main__":
           th = 0
           if (key == '\x03'):
              break
-       msg = AckermannDriveStamped();
-       msg.header.stamp = rospy.Time.now();
-       msg.header.frame_id = "base_link";
+       msg = AckermannDrive();
+      #  msg.header.stamp = rospy.Time.now();
+      #  msg.header.frame_id = "base_link";
 
-       msg.drive.speed = x*speed;
-       msg.drive.acceleration = 1;
-       msg.drive.jerk = 1;
-       msg.drive.steering_angle = th*turn
-       msg.drive.steering_angle_velocity = 1
+       msg.speed = x*speed;
+       msg.acceleration = 1;
+       msg.jerk = 1;
+       msg.steering_angle = th*turn
+       msg.steering_angle_velocity = 1
 
        pub.publish(msg)
 
   except:
-    print 'error'
+    print('error')
 
   finally:
-    msg = AckermannDriveStamped();
-    msg.header.stamp = rospy.Time.now();
-    msg.header.frame_id = "base_link";
+    msg = AckermannDrive();
+    # msg.header.stamp = rospy.Time.now();
+    # msg.header.frame_id = "base_link";
 
-    msg.drive.speed = 0;
-    msg.drive.acceleration = 1;
-    msg.drive.jerk = 1;
-    msg.drive.steering_angle = 0
-    msg.drive.steering_angle_velocity = 1
+    msg.speed = 0;
+    msg.acceleration = 1;
+    msg.jerk = 1;
+    msg.steering_angle = 0
+    msg.steering_angle_velocity = 1
     pub.publish(msg)
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)

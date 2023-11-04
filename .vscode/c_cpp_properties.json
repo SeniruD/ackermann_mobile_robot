@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/senirud/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/senirud/catkin_ws/src/beginner_tutorials/include/**",
+        "/home/senirud/catkin_ws/src/linorobot/include/**",
+        "/home/senirud/catkin_ws/src/pointgrey_camera_driver/pointgrey_camera_driver/include/**",
+        "/home/senirud/catkin_ws/src/robot_model_pkg/include/**",
+        "/home/senirud/catkin_ws/src/steer_drive_ros/steer_bot_hardware_gazebo/include/**",
+        "/home/senirud/catkin_ws/src/steer_drive_ros/steer_drive_controller/include/**",
+        "/home/senirud/catkin_ws/src/steer_drive_ros/stepback_and_steerturn_recovery/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
